@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant Interface</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="static/media/icon.png" alt="Logo">
+        </div>
+        <div class="header-buttons">
+            <a id="back-btn" href="/">Назад</a>
+        </div>
+    </header>
+    <main>
+        <div class="settings-container">
+            <h1>Настройки</h1>
+            <div class="setting-group">
+                <label for="microphone-select">Выбор микрофона:</label>
+                <select id="microphone-select">
+                    <option value="default">Микрофон по умолчанию</option>
+                    <option value="mic1">Микрофон 1</option>
+                    <option value="mic2">Микрофон 2</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label for="output-select">Устройство вывода:</label>
+                <select id="output-select">
+                    <option value="default">Вывод по умолчанию</option>
+                    <option value="speaker1">Динамик 1</option>
+                    <option value="speaker2">Динамик 2</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label for="volume-slider">Громкость:</label>
+                <input type="range" id="volume-slider" min="0" max="100" value="50">
+            </div>
+            <div class="setting-buttons">
+                <button id="save-settings">Сохранить</button>
+                <button id="reset-settings">Сбросить</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024. Xsarz</p>
+    </footer>
+</body>
+</html>

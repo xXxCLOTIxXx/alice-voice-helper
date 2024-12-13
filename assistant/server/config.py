@@ -1,5 +1,7 @@
 
 
+version = "0.0618b"
+
 port = 5000
 server_url = f"http://127.0.0.1:{port}"
 title = "App"

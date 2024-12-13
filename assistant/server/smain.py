@@ -4,6 +4,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, send, emit
 from random import randint
 from .system.assistant import Assistant
+from .config import version
 
 current_radius=0
 
@@ -14,11 +15,19 @@ assistant = Assistant(socketio)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', version=version)
 
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
+
+
+
+@app.route('/version')
+def version_info():
+    return render_template('version-info.html', version=version)
+
+
 
 @app.errorhandler(Exception)
 def handle_error(error):
