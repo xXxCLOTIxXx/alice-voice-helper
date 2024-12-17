@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление Командами</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/base-ui.css">
+    <link rel="stylesheet" href="static/css/commands.css">
+    <style>
+        body{overflow-y:inherit}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="static/media/icon.png" alt="Logo">
+        </div>
+        <a id="backButton", href="#">Назад</a>
+    </header>
+    <main>
+        <h2>Список команд</h2>
+        <div class="command-list-container">
+            <div id="commandList" class="command-list"></div>
+        </div>
+        <div class="add-command">
+            <h3>Добавить команду</h3>
+            <input type="text" id="keyword", placeholder="Введите ключевое слово">
+            <select id="action">
+                <option value="open_page">Открыть страницу</option>
+                <option value="open_file">Открыть файл</option>
+                <option value="run_file">Запустить файл</option>
+                <option value="answer_msg">Ответ</option>
+            </select>
+            <div id="detailsInput">
+                <!-- Появляющиеся элементы добавляются динамически -->
+            </div>
+            <button id="addCommand">Добавить команду</button>
+        </div>
+    </main>
+    <script src="static/js/socket.js"></script>
+    <script src="static/js/commands.js"></script>
+</body>
+</html>
