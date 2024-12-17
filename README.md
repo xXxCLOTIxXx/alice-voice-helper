@@ -3,10 +3,10 @@
         <h1 align="center">Voice Assistant</h1>
     </header>
     <div align="center">
-        <a href="https://your-contact-link.com">
+        <a href="https://github.com/xXxCLOTIxXx/xXxCLOTIxXx/blob/main/contacts.md">
             <img src="https://img.shields.io/badge/Контакты-Contacts-brightgreen" alt="Контакты">
         </a>
-        <a href="https://your-donation-link.com">
+        <a href="https://github.com/xXxCLOTIxXx/xXxCLOTIxXx/blob/main/sponsor.md">
             <img src="https://img.shields.io/badge/Спонсировать-Donate-yellow" alt="Спонсировать">
         </a>
     </div>
@@ -33,7 +33,7 @@
         </ol>
         <p>Теперь ваш проект готов к использованию.</p>
       <div align="center">
-      <img src="https://img.shields.io/badge/Документация-Documentation-magenta" alt="Документация">
+      <a href="dox/main.md"><img src="https://img.shields.io/badge/Документация-Documentation-magenta" alt="Документация"></a>
       </div>
       </div>
     </body>
