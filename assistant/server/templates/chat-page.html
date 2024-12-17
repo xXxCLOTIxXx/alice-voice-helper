@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат</title>
+    <link rel="stylesheet" href="static/css/base-ui.css">    
+    <link rel="stylesheet" href="static/css/chat-style.css">    
+</head>
+<body>
+    <header>
+        <button id="back-button" onclick="history.back();">←</button>
+        <div id="status-container">
+            <span id="internet-status" class="status">Не подключено</span>
+            <span id="bot-status" class="status"></span>
+        </div>
+        <button id="clear-button" onclick="clear_chat()">Очистить</button>
+    </header>
+    <main class="chat-container" id="chat">
+    </main>
+    <div class="input-container">
+        <input type="text" id="userInput" placeholder="Напиши сообщение...">
+        <button id="send-button" onclick="sendMessage()">Отправить</button>
+    </div>
+    <script src="static/js/socket.js"></script>
+    <script src="static/js/chat.js"></script>
+</body>
+</html>

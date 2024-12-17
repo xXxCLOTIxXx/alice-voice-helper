@@ -1,0 +1,154 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: radial-gradient(circle, #000, #18001a);
+    color: #ffffff;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(5, 5, 15, 0.95);
+    border-bottom: 2px solid #0a1555;
+    position: fixed;
+    width: 100%;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 15px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #7c2fc4 transparent;
+    scroll-behavior: smooth;
+}
+
+
+.message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.message.bot {
+    background-color: #1e3a8a;
+    align-self: flex-start;
+}
+
+.message.user {
+    background-color: #059669;
+    align-self: flex-end;
+}
+
+.message.system {
+    background-color: #7c2fc4;
+    align-self: center;
+    text-align: center;
+    max-width: 80%;
+}
+
+.input-container {
+    display: flex;
+    padding: 10px;
+    background-color: rgba(5, 5, 15, 0.95);
+    border-top: 2px solid #0a1555;
+}
+
+.input-container input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #7c2fc4;
+    border-radius: 5px;
+    background: none;
+    color: #fff;
+    max-width:none;
+}
+
+.input-container input::placeholder {
+    color: #aaa;
+}
+
+.input-container button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #7c2fc4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.input-container button:hover {
+    background-color: #ff0088;
+}
+#clear-button, #send-button {
+    margin-left: auto;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    color: #7c2fc4;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#clear-button{
+    margin-right: 5%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#status-container {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+    align-items: center;
+}
+
+.status {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 5px;
+}
+
+.status.online {
+    color: green;
+}
+
+.status.offline {
+    color: red;
+}

@@ -1,0 +1,23 @@
+
+canvas#visualizer {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(0, 0, 30, 0.8);
+    border: 3px solid #001330;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #30026d;
+}
+
+
+
+input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #7c2fc4;
+    border-radius: 5px;
+    background: none;
+    color: #fff;
+    max-width:none;
+    margin-top: 70%;
+}
