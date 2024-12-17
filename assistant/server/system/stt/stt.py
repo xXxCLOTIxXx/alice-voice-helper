@@ -8,7 +8,7 @@ from json import loads
 from threading import Thread
 
 #stt
-stt_model: str = "server/system/stt/model/vosk-model-small-ru-0.22"
+stt_model: str = "server/system/stt/model/vosk-model"
 samplerate: int = 16000
 device: int = 1
 
