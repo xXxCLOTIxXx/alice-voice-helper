@@ -1,7 +1,8 @@
 <body>
-    <header>
-        <h1 align="center">Voice Assistant</h1>
-    </header>
+    <div align="center">
+        <img src="dox/res/main_screen.jpg" alt=".">
+        <h1>Voice Assistant</h1>
+    </div>
     <div align="center">
         <a href="https://github.com/xXxCLOTIxXx/xXxCLOTIxXx/blob/main/contacts.md">
             <img src="https://img.shields.io/badge/Контакты-Contacts-brightgreen" alt="Контакты">
@@ -10,7 +11,7 @@
             <img src="https://img.shields.io/badge/Спонсировать-Donate-yellow" alt="Спонсировать">
         </a>
     </div>
-    <div class="content">
+    <div>
         <h2 align="center">По сборке:</h2>
         <ol>
             <li><strong>Скачивание модели:</strong>
