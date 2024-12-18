@@ -4,6 +4,7 @@ import threading
 from random import randint
 from time import sleep
 from flask_socketio import  SocketIO
+from ... import settings
 
 class Out:
     tts = TTS()
@@ -17,6 +18,7 @@ class Out:
         self.socketio.emit('canvas_update', {'radius': radius, 'color': color})
     
     def say(self, text):
+        if not settings.settings.get("input_output", {}).get("speak", False):return
         t = threading.Thread(target=self.tts.speak, args=(text,))
         t.start()
 

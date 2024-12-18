@@ -1,38 +1,64 @@
-import pyttsx3
-from ..utils import split_space
+from .pyttsx import pyTTSx
+from .g_tts import GTTS
+from .silerotts import SileroTTS
 
-engine = pyttsx3.init() 
+from ... import settings
 
 class TTS:
-    stop_flag = False
-    voices = engine.getProperty('voices')
-    engine.setProperty('rate', 200)
-    engine.setProperty('volume', 0.7)
-    engine.setProperty('voice', voices[2].id)
-    tts_active = False
 
+
+    def __init__(self):
+        self.worker = pyTTSx()
+        self.update()
 
     def speak(self, text):
-        if self.tts_active: 
-            return
-        
-        def _speak():
-            global engine
-            self.tts_active = True
-            words = split_space(text)
-            for word in words:
-                if self.stop_flag:
-                    break
-                engine.say(word)
-                engine.runAndWait()
-            
-            self.tts_active = False
-            self.stop_flag = False
-        
-        _speak()
+        if not settings.settings.get("input_output", {}).get("speak", False):return
+        if self.worker:
+            self.worker.speak(text)
 
 
     def stop(self):
-        global engine
-        if self.tts_active:
-            self.stop_flag = True
+        if self.worker:self.worker.stop()
+
+
+    def update(self):
+        voice_name=settings.settings.get("synthesis", {}).get("voice", None)
+        volume = settings.settings.get("input_output", {}).get("volume", 0.5)
+        vtype = settings.settings.get("synthesis", {}).get("type", None)
+        if vtype == "pyttsx3":
+            if self.worker:
+                self.worker.stop()
+                del self.worker
+            self.worker = pyTTSx()
+        elif vtype == "silero":
+            if self.worker:
+                self.worker.stop()
+                del self.worker
+            self.worker = SileroTTS()
+        elif vtype == "gtts":
+            if self.worker:
+                self.worker.stop()
+                del self.worker
+            self.worker = GTTS()
+
+        if isinstance(self.worker, pyTTSx):
+            self.worker.update(
+                float(volume),
+                voice_name=voice_name,
+            )
+        if isinstance(self.worker, GTTS):
+            self.worker.update(float(volume))
+        if isinstance(self.worker, SileroTTS):
+            self.worker.update(voice_name, float(volume))
+
+
+    def get_voice_models(self, type):
+        if type == 'pyttsx3':
+            return pyTTSx.get_voices()
+        if type == 'silero':
+            return SileroTTS.get_voices()
+
+    @property
+    def tts_active(self):
+        if self.worker:return self.worker.tts_active
+        else: False

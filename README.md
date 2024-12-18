@@ -19,7 +19,7 @@
                 <p>Выберите подходящую модель для вашего проекта и скачайте её.</p>
             </li>
             <li><strong>Поместить модель в нужную папку:</strong>
-                <p>После того как модель будет скачана, поместите её в папку: <code>assistant\server\system\stt\model\model_name</code>.</p>
+                <p>После того как модель будет скачана, поместите её в папку: <code>assistant\server\system\stt\</code> и папку с ней переименуйте в <code>model</code>.</p>
                 <p>Убедитесь, что модель находится в правильной директории, заменив <code>model_name</code> на vosk-model</p>
             </li>
             <li><strong>Сборка программы в EXE файл:</strong>

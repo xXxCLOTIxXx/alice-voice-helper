@@ -7,12 +7,12 @@ from g4f.errors import (
 )
 
 
-
 class g4f:
     def __init__(self, model, send_ai_status):
         self.client = Client()
         self.model = model
         self.send_ai_status = send_ai_status
+        self.is_stop = False
 
 
     def send_response(self, message: str | list):
@@ -32,25 +32,38 @@ class g4f:
 
     def answer(self, message: str | list):
         while True:
-            self.send_ai_status('думает...')
+            if not self.is_stop:
+                self.send_ai_status('думает...')
+            else:
+                return -10
             try:
                 msg = self.send_response(message), 1
-                self.send_ai_status('')
-                return msg
+                if not self.is_stop:
+                    self.send_ai_status('')
+                    return msg
             except (
                 ProviderNotWorkingError,
                 ModelNotAllowedError,
                 ModelNotSupportedError,
             ):
-                self.send_ai_status('Смена провайдера g4f', 'orange')
+                if not self.is_stop:
+                    self.send_ai_status('Смена провайдера g4f', 'orange')
+                else:
+                    return -10
             except RateLimitError:
-                return "[G4F] Сервис перегружен. попробуйте позже.", -1
+                if not self.is_stop:
+                    return "[G4F] Сервис перегружен. попробуйте позже.", -1
+                return -10
             except RetryProviderError:
-                self.send_ai_status('Ошибка соединения', 'red')
-                return None
+                if not self.is_stop:
+                    self.send_ai_status('Ошибка соединения', 'red')
+                return -10
             except Exception as e:
-                return f"[G4F] ошибка ({e})", -1
+                if not self.is_stop:
+                    return f"[G4F] ошибка ({e})", -1
+                return -10
     
 
     def stop(self):
-        pass
+        self.is_stop = True
+        self.send_ai_status('Ожидание завершения запроса...', 'orange')

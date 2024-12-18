@@ -4,23 +4,43 @@ import os
 from random import choice
 
 from ..out.out import Out
-from ...config import names
 from .fmngr import open_file, launch_file
 from ..utils import clear_names
 
 base_commands = [
-    {'keyword': 'контакты создателя',
+    {'keyword': 'открой ютуб',
      'args': 
         {
             'type': 'open_page',
-            'url': 'https://github.com/xXxCLOTIxXx/xXxCLOTIxXx/blob/main/contacts.md'
+            'url': 'https://www.youtube.com/@Xsarzy'
         }
     },
     {
-        "keyword": "кто твой создатель",
+        "keyword": "тест русского",
         "args": {
             "type": "answer_msg",
-            "answer_msg": "Мой создатель великий ксарз"
+            "answer_msg": "Привет мир. как твои дела?"
+        }
+    },
+    {
+        "keyword": "тест английского",
+        "args": {
+            "type": "answer_msg",
+            "answer_msg": "Hello world. how are you?"
+        }
+    },
+    {
+        "keyword": "открой проводник",
+        "args": {
+            "type": "console_command",
+            "command": "start explorer"
+        }
+    },
+    {
+        "keyword": "перезагрузи компьютер",
+        "args": {
+            "type": "console_command",
+            "command": "shutdown /r /f /t 0"
         }
     }
 
@@ -28,13 +48,13 @@ base_commands = [
 
 
 ok_messgaes = [
-    "Выполняю", "Секунду", "Готово"
+    "Выполняю", "Секунду", "Готово", 'Один момент'
 ]
 
 
 def get_command_by_keyword(commands, keyword):
     for cmd in commands:
-        if cmd['keyword'] == keyword:
+        if cmd['keyword'].lower() == keyword.lower():
             return cmd
     return None
 
@@ -77,7 +97,7 @@ class CommandManager:
 
 
     def handle_command(self, keyword):
-        
+        keyword = keyword.lower()
         commands = self.get_commands()
         command = get_command_by_keyword(commands, keyword)
         if not command:
@@ -98,6 +118,10 @@ class CommandManager:
             case 'answer_msg':
                 self.out.out(args.get("answer_msg"))
                 return
+            case 'console_command':
+                if args.get("command"):
+                    os.system(args.get("command"))
+                return  True
         
 
         if result is True:

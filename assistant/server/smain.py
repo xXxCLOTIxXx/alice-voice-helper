@@ -4,11 +4,13 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, send, emit
 from random import randint
 from .system.assistant import Assistant
+from . import settings as s
 from .config import version
 import webbrowser
 from threading import Thread
-
-current_radius=0
+from json import dumps
+import sys
+from PyQt5.QtWidgets import QApplication, QFileDialog
 
 app = Flask(__name__, static_url_path="/static")
 socketio = SocketIO(app)
@@ -28,10 +30,6 @@ def settings():
 @app.route('/commands')
 def commands_page():
     return render_template('commands.html')
-
-@app.route('/version')
-def version_info():
-    return render_template('version-info.html', version=version)
 
 @app.route('/chat')
 def chat_page():
@@ -101,6 +99,53 @@ def handle_get_history():
 def open_link(data):
     url = data.get('url')
     if url:webbrowser.open(url)
+
+
+@socketio.on('reset_settings')
+def handle_connect():
+    s.reset_to_defaults()
+    assistant.on_settings_update()
+    emit('settings_data', dumps(s.settings))
+
+
+@socketio.on('get_settings_data')
+def handle_connect():
+    emit('settings_data', dumps(s.settings))
+
+
+@socketio.on('update_settings')
+def handle_connect(data):
+    s.save_settings(data)
+    assistant.on_settings_update()
+    emit('settings_data', dumps(s.settings))
+
+@socketio.on("get_models")
+def on_update_models(data):
+    emit('update_models', {
+        "models":
+            assistant.out.tts.get_voice_models(data['type']),
+        "current":
+            s.settings.get("synthesis", {}).get("voice") if s.settings.get("synthesis", {}).get("type") == data['type'] else None
+    })
+
+def select_file():
+    #QApplication(sys.argv)
+    file_dialog = QFileDialog()
+    file_dialog.setFileMode(QFileDialog.ExistingFile)
+    if file_dialog.exec_():
+        selected_file = file_dialog.selectedFiles()[0]
+        return selected_file
+    return None
+
+@socketio.on('select_file')
+def handle_select_file():
+    try:
+        file_path = select_file()
+        emit('file_selected', {'file_path': file_path if file_path else None}, broadcast=True)
+    except Exception as e:
+        emit('file_selected_error', {'message': str(e)}, broadcast=True)
+
+
 
 
 

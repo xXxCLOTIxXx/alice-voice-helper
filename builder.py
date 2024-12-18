@@ -32,12 +32,24 @@ PY_REQUIREMENTS = [
 'sounddevice',
 'pyttsx3',
 'g4f',
+'gtts',
+'pygame',
+'torch',
+'omegaconf',
+'num2words',
+'openai',
+'numpy',
+
+
 'pyinstaller',
 'pillow'
 ]
 INCLUDE_MODULES = [
     'vosk',
-    'engineio'
+    'engineio',
+    'torch',
+    'omegaconf',
+    'antlr4'
 ]
 
 

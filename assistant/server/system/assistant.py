@@ -1,13 +1,13 @@
+
 from .stt.stt import stt
 from .commands.cmd import CommandManager
 from threading import Thread
 from .out.out import Out
 from .storage.chat import Chat
 from .brain.brain import Brain
-from ..config import names
 from time import sleep
 from .utils import clear_names
-from os import system
+from .. import settings
 
 _stt = stt()
 
@@ -23,7 +23,7 @@ class Assistant:
 		self.cmd = CommandManager(self.out)
 		self.brain = Brain(self.send_ai_status)
 		
-		status = self.brain.set_g4f()
+		status = self.brain.update()
 		if status:
 			self.out.out(status[0], status[1])
 		
@@ -90,11 +90,15 @@ class Assistant:
 		if text in ('молча', 'тихо', 'молчи') and self.brain.info['active'] == True:
 			if self.brain.info['active'] == False:return True
 			self.brain.info['active'] = False
+			settings.settings["dialog_model"]['dialog_mode'] = False
+			settings.save_settings()
 			self.out.out("Поддержка диалога отключена")
 			return True
 		if text == 'говори':
 			if self.brain.info['active'] == True:return True
 			self.brain.info['active'] = True
+			settings.settings["dialog_model"]['dialog_mode'] = True
+			settings.save_settings()
 			self.out.out("Поддержка диалога включена")
 			return True
 		if text == 'стоп' and (self.out.tts.tts_active or self.brain.busy):
@@ -102,8 +106,13 @@ class Assistant:
 			self.out.tts.stop()
 			self.brain.stop()
 			return True
-		if text in ("перезагрузи компьютер", "перезагрузить компьютер"):
-			system("shutdown /r")
 
 		return False
 
+
+
+	def on_settings_update(self):
+		result = self.brain.update()
+		if result: self.out.out(result[0], result[1])
+		self.out.tts.update()
+		_stt.update()
