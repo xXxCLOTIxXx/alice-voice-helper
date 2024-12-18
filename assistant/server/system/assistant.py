@@ -1,3 +1,4 @@
+
 from .stt.stt import stt
 from .commands.cmd import CommandManager
 from threading import Thread
