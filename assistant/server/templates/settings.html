@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="static/css/settings.css">
+</head>
+<body>
+    <header>
+        <h1>Настройки</h1>
+        <a href="/">Назад</a>
+    </header>
+    <main>
+        <div class="tabs">
+            <button class="tab-button active" data-tab="synthesis">Синтез</button>
+            <button class="tab-button" data-tab="input-output">Ввод / Вывод</button>
+            <button class="tab-button" data-tab="dialog-model">Диалоговая модель</button>
+            <button class="tab-button" data-tab="other">Другое</button> <!-- New tab for "Другое" -->
+        </div>
+
+        <div class="tab-content active" id="synthesis">
+            <label for="synthesis-type">Выберите тип синтеза:</label>
+            <select id="synthesis-type">
+                <option value="gtts">GTTS</option>
+                <option value="pyttsx3">pyttsx3</option>
+                <option value="silero">sileroTTS</option>
+            </select>
+
+            <div id="voice-selection" style="display: none;">
+                <label for="voice-list">Выберите голос:</label>
+                <select id="voice-list"></select>
+            </div>
+        </div>
+
+        <div class="tab-content" id="input-output">
+            <label for="volume-slider">Громкость:</label>
+            <input type="range" id="volume-slider" min="0.1" max="1.0" step="0.001" value="0.5">
+
+            <label>
+                <input type="checkbox" id="speak-checkbox"> Озвучивать текст
+            </label>
+            <label>
+                <input type="checkbox" id="listen-checkbox"> Слушать речь
+            </label>
+        </div>
+
+        <div class="tab-content" id="dialog-model">
+            <label for="dialog-model-select">Выберите модель:</label>
+            <select id="dialog-model-select">
+                <option value="g4f">g4f</option>
+                <option value="chatgpt">ChatGPT</option>
+            </select>
+
+            <div id="token-field" style="display: none;">
+                <label for="chatgpt-token">Введите токен:</label>
+                <input type="text" id="chatgpt-token" placeholder="Токен ChatGPT">
+            </div>
+            <div id="dialog_mode_section">
+                <label for="dialog_mode">Активировать диалоговый режим</label>
+                <input type="checkbox" id="dialog_mode" name="dialog_mode">
+            </div>
+        </div>
+
+        <div class="tab-content" id="other">
+            <label for="names-list">Введите имена через запятую:</label>
+            <input type="text" id="names-list" placeholder="Имена">
+
+            <label for="initial-prompt">Введите начальный промт ИИ:</label>
+            <textarea id="initial-prompt" placeholder="Начальный промт"></textarea>
+        </div>
+
+        <div class="button-container">
+            <button id="apply-button">Применить</button>
+            <button id="reset-button">Сбросить</button>
+        </div>
+    </main>
+
+    <script src="static/js/socket.js"></script>
+    <script src="static/js/settings.js"></script>
+</body>
+</html>

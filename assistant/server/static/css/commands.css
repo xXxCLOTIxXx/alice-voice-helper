@@ -1,0 +1,55 @@
+.command-list-container {
+    flex: 1;
+    max-width: 100%;
+    width: auto;
+    padding: 20px;
+    max-height: 130px;
+    overflow-y: auto;
+}
+
+.command-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.command{
+    margin-top: 6px;
+}
+
+#action{
+    margin-top: 5px;
+}
+
+#detailsInput{
+    margin-top: 2px;
+    margin-bottom: 5px;
+}
+
+#detailsInput, #keyword{
+    max-width: 90%;
+    padding: 2%;
+}
+
+select{
+    padding: 5px;
+    max-width: 90%;
+    border-radius: 10px;
+}
+
+/* Стили для кастомной кнопки */
+.filePickerButton {
+    background-color: #4CAF50; /* Зеленый */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.filePickerButton:hover {
+    background-color: #45a049; /* Тёмно-зеленый при наведении */
+}
+
+/* Для других элементов можно добавить дополнительные стили */
